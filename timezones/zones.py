@@ -10,4 +10,9 @@ PRETTY_TIMEZONE_CHOICES = []
 
 for tz in pytz.common_timezones:
     now = datetime.now(pytz.timezone(tz))
-    PRETTY_TIMEZONE_CHOICES.append((tz, "(GMT%s) %s" % (now.strftime("%z"), tz)))
+    tz_offset = now.strftime("%z")	
+    PRETTY_TIMEZONE_CHOICES.append((int(tz_offset), tz, "(GMT %s) %s" % (tz_offset, tz)))	
+
+PRETTY_TIMEZONE_CHOICES.sort()	
+for i in xrange(len(PRETTY_TIMEZONE_CHOICES)):	
+    PRETTY_TIMEZONE_CHOICES[i] = PRETTY_TIMEZONE_CHOICES[i][1:]
